@@ -1,20 +1,21 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.6
--- http://www.phpmyadmin.net
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: 10 Jan 2017 pada 16.06
--- Versi Server: 5.6.16
--- PHP Version: 5.5.9
+-- Host: localhost:3306
+-- Generation Time: Jul 13, 2024 at 08:58 AM
+-- Server version: 8.2.0
+-- PHP Version: 7.3.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `helpdesk`
@@ -23,18 +24,17 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bagian_departemen`
+-- Table structure for table `bagian_departemen`
 --
 
-CREATE TABLE IF NOT EXISTS `bagian_departemen` (
-  `id_bagian_dept` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `bagian_departemen` (
+  `id_bagian_dept` int NOT NULL,
   `nama_bagian_dept` varchar(30) NOT NULL,
-  `id_dept` int(11) NOT NULL,
-  PRIMARY KEY (`id_bagian_dept`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `id_dept` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `bagian_departemen`
+-- Dumping data for table `bagian_departemen`
 --
 
 INSERT INTO `bagian_departemen` (`id_bagian_dept`, `nama_bagian_dept`, `id_dept`) VALUES
@@ -44,17 +44,16 @@ INSERT INTO `bagian_departemen` (`id_bagian_dept`, `nama_bagian_dept`, `id_dept`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `departemen`
+-- Table structure for table `departemen`
 --
 
-CREATE TABLE IF NOT EXISTS `departemen` (
-  `id_dept` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_dept` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_dept`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+CREATE TABLE `departemen` (
+  `id_dept` int NOT NULL,
+  `nama_dept` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `departemen`
+-- Dumping data for table `departemen`
 --
 
 INSERT INTO `departemen` (`id_dept`, `nama_dept`) VALUES
@@ -64,19 +63,18 @@ INSERT INTO `departemen` (`id_dept`, `nama_dept`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `history_feedback`
+-- Table structure for table `history_feedback`
 --
 
-CREATE TABLE IF NOT EXISTS `history_feedback` (
-  `id_feedback` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `history_feedback` (
+  `id_feedback` int NOT NULL,
   `id_ticket` varchar(13) NOT NULL,
-  `feedback` int(11) NOT NULL,
-  `reported` varchar(5) NOT NULL,
-  PRIMARY KEY (`id_feedback`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+  `feedback` int NOT NULL,
+  `reported` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `history_feedback`
+-- Dumping data for table `history_feedback`
 --
 
 INSERT INTO `history_feedback` (`id_feedback`, `id_ticket`, `feedback`, `reported`) VALUES
@@ -91,41 +89,39 @@ INSERT INTO `history_feedback` (`id_feedback`, `id_ticket`, `feedback`, `reporte
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `informasi`
+-- Table structure for table `informasi`
 --
 
-CREATE TABLE IF NOT EXISTS `informasi` (
-  `id_informasi` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `informasi` (
+  `id_informasi` int NOT NULL,
   `tanggal` datetime NOT NULL,
   `subject` varchar(35) NOT NULL,
   `pesan` text NOT NULL,
   `status` decimal(2,0) NOT NULL,
-  `id_user` varchar(5) NOT NULL,
-  PRIMARY KEY (`id_informasi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+  `id_user` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `informasi`
+-- Dumping data for table `informasi`
 --
 
 INSERT INTO `informasi` (`id_informasi`, `tanggal`, `subject`, `pesan`, `status`, `id_user`) VALUES
-(1, '2016-12-04 09:24:28', 'WAJIB MENGISI FEEDBACK', 'FEEDBACK SANGATLAH PENTING GUNA MEMBANTU KAMI DALAM MEMBERIKAN PENILAIAN TERHADAP KINERJA TEKNISI, INI MENYANGKUT DENGAN KEPUASAN ANDA', '1', 'K0001'),
-(2, '2016-12-21 13:42:59', 'JIJ', 'NKNJK', '1', 'K0001');
+(1, '2016-12-04 09:24:28', 'WAJIB MENGISI FEEDBACK', 'FEEDBACK SANGATLAH PENTING GUNA MEMBANTU KAMI DALAM MEMBERIKAN PENILAIAN TERHADAP KINERJA TEKNISI, INI MENYANGKUT DENGAN KEPUASAN ANDA', 1, 'K0001'),
+(2, '2016-12-21 13:42:59', 'JIJ', 'NKNJK', 1, 'K0001');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jabatan`
+-- Table structure for table `jabatan`
 --
 
-CREATE TABLE IF NOT EXISTS `jabatan` (
-  `id_jabatan` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_jabatan` varchar(30) NOT NULL,
-  PRIMARY KEY (`id_jabatan`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+CREATE TABLE `jabatan` (
+  `id_jabatan` int NOT NULL,
+  `nama_jabatan` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jabatan`
+-- Dumping data for table `jabatan`
 --
 
 INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
@@ -137,21 +133,20 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `karyawan`
+-- Table structure for table `karyawan`
 --
 
-CREATE TABLE IF NOT EXISTS `karyawan` (
+CREATE TABLE `karyawan` (
   `nik` varchar(5) NOT NULL,
   `nama` varchar(35) NOT NULL,
   `alamat` text NOT NULL,
   `jk` varchar(10) NOT NULL,
-  `id_bagian_dept` int(11) NOT NULL,
-  `id_jabatan` int(11) NOT NULL,
-  PRIMARY KEY (`nik`)
+  `id_bagian_dept` int NOT NULL,
+  `id_jabatan` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `karyawan`
+-- Dumping data for table `karyawan`
 --
 
 INSERT INTO `karyawan` (`nik`, `nama`, `alamat`, `jk`, `id_bagian_dept`, `id_jabatan`) VALUES
@@ -166,17 +161,16 @@ INSERT INTO `karyawan` (`nik`, `nama`, `alamat`, `jk`, `id_bagian_dept`, `id_jab
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategori`
+-- Table structure for table `kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `kategori` (
-  `id_kategori` int(11) NOT NULL AUTO_INCREMENT,
-  `nama_kategori` varchar(35) NOT NULL,
-  PRIMARY KEY (`id_kategori`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+CREATE TABLE `kategori` (
+  `id_kategori` int NOT NULL,
+  `nama_kategori` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kategori`
+-- Dumping data for table `kategori`
 --
 
 INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
@@ -186,38 +180,36 @@ INSERT INTO `kategori` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kondisi`
+-- Table structure for table `kondisi`
 --
 
-CREATE TABLE IF NOT EXISTS `kondisi` (
-  `id_kondisi` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `kondisi` (
+  `id_kondisi` int NOT NULL,
   `nama_kondisi` varchar(30) NOT NULL,
-  `waktu_respon` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`id_kondisi`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+  `waktu_respon` decimal(10,0) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kondisi`
+-- Dumping data for table `kondisi`
 --
 
 INSERT INTO `kondisi` (`id_kondisi`, `nama_kondisi`, `waktu_respon`) VALUES
-(1, 'MENDESAK', '1');
+(1, 'MENDESAK', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `sub_kategori`
+-- Table structure for table `sub_kategori`
 --
 
-CREATE TABLE IF NOT EXISTS `sub_kategori` (
-  `id_sub_kategori` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `sub_kategori` (
+  `id_sub_kategori` int NOT NULL,
   `nama_sub_kategori` varchar(35) NOT NULL,
-  `id_kategori` int(11) NOT NULL,
-  PRIMARY KEY (`id_sub_kategori`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+  `id_kategori` int NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `sub_kategori`
+-- Dumping data for table `sub_kategori`
 --
 
 INSERT INTO `sub_kategori` (`id_sub_kategori`, `nama_sub_kategori`, `id_kategori`) VALUES
@@ -228,81 +220,80 @@ INSERT INTO `sub_kategori` (`id_sub_kategori`, `nama_sub_kategori`, `id_kategori
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `teknisi`
+-- Table structure for table `teknisi`
 --
 
-CREATE TABLE IF NOT EXISTS `teknisi` (
+CREATE TABLE `teknisi` (
   `id_teknisi` varchar(5) NOT NULL,
   `nik` varchar(5) NOT NULL,
-  `id_kategori` int(11) NOT NULL,
+  `id_kategori` int NOT NULL,
   `status` varchar(20) NOT NULL,
-  `point` decimal(2,0) NOT NULL,
-  PRIMARY KEY (`id_teknisi`)
+  `point` decimal(2,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `teknisi`
+-- Dumping data for table `teknisi`
 --
 
 INSERT INTO `teknisi` (`id_teknisi`, `nik`, `id_kategori`, `status`, `point`) VALUES
-('T0001', 'K0003', 4, '', '1');
+('T0001', 'K0003', 4, '', 1),
+('T0002', 'K0005', 4, '', 1);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `ticket`
+-- Table structure for table `ticket`
 --
 
-CREATE TABLE IF NOT EXISTS `ticket` (
+CREATE TABLE `ticket` (
   `id_ticket` varchar(13) NOT NULL,
   `tanggal` datetime NOT NULL,
-  `tanggal_proses` datetime NOT NULL,
-  `tanggal_solved` datetime NOT NULL,
+  `tanggal_proses` datetime DEFAULT NULL,
+  `tanggal_solved` datetime DEFAULT NULL,
   `reported` varchar(5) NOT NULL,
-  `id_sub_kategori` int(11) NOT NULL,
+  `id_sub_kategori` int NOT NULL,
   `problem_summary` varchar(50) NOT NULL,
   `problem_detail` text NOT NULL,
   `id_teknisi` varchar(5) NOT NULL,
-  `status` int(11) NOT NULL,
-  `progress` decimal(10,0) NOT NULL,
-  PRIMARY KEY (`id_ticket`)
+  `status` int NOT NULL,
+  `progress` decimal(10,0) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `ticket`
+-- Dumping data for table `ticket`
 --
 
 INSERT INTO `ticket` (`id_ticket`, `tanggal`, `tanggal_proses`, `tanggal_solved`, `reported`, `id_sub_kategori`, `problem_summary`, `problem_detail`, `id_teknisi`, `status`, `progress`) VALUES
-('T201612020001', '2016-12-02 16:59:18', '2016-12-02 17:00:39', '0000-00-00 00:00:00', 'K0001', 2, 'SASAS', 'NBNB', 'T0002', 6, '90'),
-('T201612020002', '2016-12-02 17:05:29', '2016-12-02 17:09:06', '0000-00-00 00:00:00', 'K0001', 2, 'CXZCX', 'CXZC', 'T0002', 6, '100'),
-('T201612040003', '2016-12-04 07:06:47', '2016-12-04 08:20:29', '2016-12-04 08:22:11', 'K0001', 4, 'KLKL', 'ASA', 'T0002', 6, '100'),
-('T201612040004', '2016-12-04 08:24:44', '2016-12-04 08:25:57', '2016-12-04 09:47:27', 'K0001', 2, 'KLKL', 'BBB', 'T0002', 6, '100'),
-('T201612040005', '2016-12-04 09:43:02', '2016-12-04 09:46:50', '0000-00-00 00:00:00', 'K0001', 2, 'SASAS', 'NJKHKJK', 'T0002', 4, '0'),
-('T201612180006', '2016-12-18 07:00:49', '2016-12-18 07:25:21', '2016-12-18 07:26:11', 'K0002', 4, 'TES', 'TES', 'T0001', 6, '100'),
-('T201612180007', '2016-12-18 08:09:25', '2016-12-18 08:17:45', '2016-12-18 08:20:37', 'K0002', 2, 'RUSAK MONITOR', 'TOLONG CEPAT DI PROSES KARENA TIDAK ADA MONITOR BACKUP', 'T0001', 6, '0'),
-('T201612190008', '2016-12-19 13:02:25', '2016-12-19 13:03:37', '2016-12-19 13:03:54', 'K0001', 4, 'NH', 'NH', 'T0001', 6, '100'),
-('T201612190009', '2016-12-19 14:09:09', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'K0001', 4, 'GDGFGHH', 'ASDFGHJKL', '', 2, '0'),
-('T201612190010', '2016-12-19 14:35:33', '2016-12-19 15:09:27', '2016-12-19 15:09:59', 'K0001', 2, '35535', '53', 'T0001', 6, '100'),
-('T201612280011', '2016-12-28 15:15:32', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'K0001', 2, '6UYUGTY', 'NJHJHJHJHJHJHJ BHGHJG B JHJHJ JHJHJNN', 'T0001', 3, '0');
+('T201612020001', '2016-12-02 16:59:18', '2016-12-02 17:00:39', '0000-00-00 00:00:00', 'K0001', 2, 'SASAS', 'NBNB', 'T0002', 4, 90),
+('T201612020002', '2016-12-02 17:05:29', '2016-12-02 17:09:06', '0000-00-00 00:00:00', 'K0001', 2, 'CXZCX', 'CXZC', 'T0002', 6, 100),
+('T201612040003', '2016-12-04 07:06:47', '2016-12-04 08:20:29', '2016-12-04 08:22:11', 'K0001', 4, 'KLKL', 'ASA', 'T0002', 6, 100),
+('T201612040004', '2016-12-04 08:24:44', '2016-12-04 08:25:57', '2016-12-04 09:47:27', 'K0001', 2, 'KLKL', 'BBB', 'T0002', 6, 100),
+('T201612040005', '2016-12-04 09:43:02', '2016-12-04 09:46:50', '0000-00-00 00:00:00', 'K0001', 2, 'SASAS', 'NJKHKJK', 'T0002', 4, 0),
+('T201612180006', '2016-12-18 07:00:49', '2016-12-18 07:25:21', '2016-12-18 07:26:11', 'K0002', 4, 'TES', 'TES', 'T0001', 6, 100),
+('T201612180007', '2016-12-18 08:09:25', '2016-12-18 08:17:45', '2016-12-18 08:20:37', 'K0002', 2, 'RUSAK MONITOR', 'TOLONG CEPAT DI PROSES KARENA TIDAK ADA MONITOR BACKUP', 'T0001', 6, 0),
+('T201612190008', '2016-12-19 13:02:25', '2016-12-19 13:03:37', '2016-12-19 13:03:54', 'K0001', 4, 'NH', 'NH', 'T0001', 6, 100),
+('T201612190009', '2016-12-19 14:09:09', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 'K0001', 4, 'GDGFGHH', 'ASDFGHJKL', '', 2, 0),
+('T201612190010', '2016-12-19 14:35:33', '2016-12-19 15:09:27', '2016-12-19 15:09:59', 'K0001', 2, '35535', '53', 'T0001', 6, 100),
+('T201612280011', '2016-12-28 15:15:32', '2024-07-12 16:18:35', '0000-00-00 00:00:00', 'K0001', 2, '6UYUGTY', 'NJHJHJHJHJHJHJ BHGHJG B JHJHJ JHJHJNN', 'T0001', 4, 0),
+('T202407130012', '2024-07-13 15:12:39', NULL, NULL, 'K0001', 4, 'TES', 'TES', '', 1, 0);
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tracking`
+-- Table structure for table `tracking`
 --
 
-CREATE TABLE IF NOT EXISTS `tracking` (
-  `id_tracking` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `tracking` (
+  `id_tracking` int NOT NULL,
   `id_ticket` varchar(13) NOT NULL,
   `tanggal` datetime NOT NULL,
   `status` varchar(50) NOT NULL,
   `deskripsi` text NOT NULL,
-  `id_user` varchar(5) NOT NULL,
-  PRIMARY KEY (`id_tracking`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=64 ;
+  `id_user` varchar(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `tracking`
+-- Dumping data for table `tracking`
 --
 
 INSERT INTO `tracking` (`id_tracking`, `id_ticket`, `tanggal`, `status`, `deskripsi`, `id_user`) VALUES
@@ -368,24 +359,31 @@ INSERT INTO `tracking` (`id_tracking`, `id_ticket`, `tanggal`, `status`, `deskri
 (60, 'T201612190010', '2016-12-19 15:09:59', 'Up Progress To 100 %', 'OKJE', 'K0003'),
 (61, 'T201612280011', '2016-12-28 15:15:32', 'Created Ticket', '', 'K0001'),
 (62, 'T201612280011', '2016-12-28 15:15:54', 'Ticket disetujui', '', 'K0001'),
-(63, 'T201612280011', '2016-12-28 15:16:46', 'Pemilihan Teknisi', 'TICKET DIBERIKAN KEPADA TEKNISI', 'K0001');
+(63, 'T201612280011', '2016-12-28 15:16:46', 'Pemilihan Teknisi', 'TICKET DIBERIKAN KEPADA TEKNISI', 'K0001'),
+(64, 'T201612280011', '2024-07-12 16:18:35', 'Diproses oleh teknisi', '', 'K0003'),
+(65, 'T202407120012', '2024-07-12 16:22:48', 'Created Ticket', '', 'K0002'),
+(66, 'T202407120012', '2024-07-12 16:34:20', 'Ticket disetujui', '', 'K0001'),
+(67, 'T202407120012', '2024-07-12 16:39:36', 'Pemilihan Teknisi', 'TICKET DIBERIKAN KEPADA TEKNISI', 'K0001'),
+(68, 'T202407120012', '2024-07-12 16:40:43', 'Pending oleh teknisi', '', 'K0003'),
+(69, 'T202407130013', '2024-07-13 08:09:40', 'Created Ticket', '', 'K0001'),
+(70, 'T202407130013', '2024-07-13 08:11:30', 'Created Ticket', '', 'K0001'),
+(71, 'T202407130012', '2024-07-13 15:12:39', 'Created Ticket', '', 'K0001');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
-CREATE TABLE IF NOT EXISTS `user` (
-  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE `user` (
+  `id_user` int NOT NULL,
   `username` varchar(5) NOT NULL,
   `password` varchar(32) NOT NULL,
-  `level` varchar(10) NOT NULL,
-  PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+  `level` varchar(10) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`, `level`) VALUES
@@ -395,6 +393,153 @@ INSERT INTO `user` (`id_user`, `username`, `password`, `level`) VALUES
 (4, 'K0005', '202cb962ac59075b964b07152d234b70', 'USER'),
 (5, 'K0007', '202cb962ac59075b964b07152d234b70', 'ADMIN'),
 (6, 'K0002', '5d253f8fc6085b725e03e89bac891bac', 'ADMIN');
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `bagian_departemen`
+--
+ALTER TABLE `bagian_departemen`
+  ADD PRIMARY KEY (`id_bagian_dept`);
+
+--
+-- Indexes for table `departemen`
+--
+ALTER TABLE `departemen`
+  ADD PRIMARY KEY (`id_dept`);
+
+--
+-- Indexes for table `history_feedback`
+--
+ALTER TABLE `history_feedback`
+  ADD PRIMARY KEY (`id_feedback`);
+
+--
+-- Indexes for table `informasi`
+--
+ALTER TABLE `informasi`
+  ADD PRIMARY KEY (`id_informasi`);
+
+--
+-- Indexes for table `jabatan`
+--
+ALTER TABLE `jabatan`
+  ADD PRIMARY KEY (`id_jabatan`);
+
+--
+-- Indexes for table `karyawan`
+--
+ALTER TABLE `karyawan`
+  ADD PRIMARY KEY (`nik`);
+
+--
+-- Indexes for table `kategori`
+--
+ALTER TABLE `kategori`
+  ADD PRIMARY KEY (`id_kategori`);
+
+--
+-- Indexes for table `kondisi`
+--
+ALTER TABLE `kondisi`
+  ADD PRIMARY KEY (`id_kondisi`);
+
+--
+-- Indexes for table `sub_kategori`
+--
+ALTER TABLE `sub_kategori`
+  ADD PRIMARY KEY (`id_sub_kategori`);
+
+--
+-- Indexes for table `teknisi`
+--
+ALTER TABLE `teknisi`
+  ADD PRIMARY KEY (`id_teknisi`);
+
+--
+-- Indexes for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD PRIMARY KEY (`id_ticket`);
+
+--
+-- Indexes for table `tracking`
+--
+ALTER TABLE `tracking`
+  ADD PRIMARY KEY (`id_tracking`);
+
+--
+-- Indexes for table `user`
+--
+ALTER TABLE `user`
+  ADD PRIMARY KEY (`id_user`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `bagian_departemen`
+--
+ALTER TABLE `bagian_departemen`
+  MODIFY `id_bagian_dept` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `departemen`
+--
+ALTER TABLE `departemen`
+  MODIFY `id_dept` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `history_feedback`
+--
+ALTER TABLE `history_feedback`
+  MODIFY `id_feedback` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+
+--
+-- AUTO_INCREMENT for table `informasi`
+--
+ALTER TABLE `informasi`
+  MODIFY `id_informasi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `jabatan`
+--
+ALTER TABLE `jabatan`
+  MODIFY `id_jabatan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `kategori`
+--
+ALTER TABLE `kategori`
+  MODIFY `id_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `kondisi`
+--
+ALTER TABLE `kondisi`
+  MODIFY `id_kondisi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `sub_kategori`
+--
+ALTER TABLE `sub_kategori`
+  MODIFY `id_sub_kategori` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `tracking`
+--
+ALTER TABLE `tracking`
+  MODIFY `id_tracking` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+
+--
+-- AUTO_INCREMENT for table `user`
+--
+ALTER TABLE `user`
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
