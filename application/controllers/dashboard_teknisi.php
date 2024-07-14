@@ -138,7 +138,14 @@ class Dashboard_teknisi extends CI_Controller
 
     public function fetch_report_bulanan()
     {
-        $bulan = $this->input->post('bulan');
+        $bulan_tahun = $this->input->post('bulan_tahun');
+        if ($bulan_tahun) {
+            list($bulan, $tahun) = explode('-', $bulan_tahun);
+        } else {
+            $bulan = '';
+            $tahun = '';
+        }
+
         $query = 'SELECT
                 a.id_ticket,
                 a.tanggal as request_date,
@@ -151,13 +158,13 @@ class Dashboard_teknisi extends CI_Controller
                 a.status,
                 a.progress
               FROM `ticket` a';
-        if ($bulan) {
-            $query .= ' WHERE MONTH(a.tanggal) = ' . $bulan;
+        if ($bulan && $tahun) {
+            $query .= ' WHERE MONTH(a.tanggal) = ' . $bulan . ' AND YEAR(a.tanggal) = ' . $tahun;
         }
+
         $data['rows'] = $this->db->query($query)->result();
         echo json_encode($data['rows']);
     }
-
 
     public function pdfreportteknisi($id)
     {

@@ -17,21 +17,15 @@
 			</div>
 			<div class="panel-body">
 				<div class="form-group">
-					<label for="bulan">Filter Bulan:</label>
-					<select id="bulan" class="form-control">
-						<option value="">Pilih Bulan</option>
-						<option value="1">Januari</option>
-						<option value="2">Februari</option>
-						<option value="3">Maret</option>
-						<option value="4">April</option>
-						<option value="5">Mei</option>
-						<option value="6">Juni</option>
-						<option value="7">Juli</option>
-						<option value="8">Agustus</option>
-						<option value="9">September</option>
-						<option value="10">Oktober</option>
-						<option value="11">November</option>
-						<option value="12">Desember</option>
+					<label for="bulan_tahun">Filter Bulan dan Tahun:</label>
+					<select id="bulan_tahun" class="form-control">
+						<?php
+						$currentYear = date('Y');
+						for ($month = 1; $month <= 12; $month++) {
+							$monthPadded = str_pad($month, 2, '0', STR_PAD_LEFT);
+							echo '<option value="' . $monthPadded . '-' . $currentYear . '">' . $monthPadded . '-' . $currentYear . '</option>';
+						}
+						?>
 					</select>
 				</div>
 				<table id="table" data-toggle="table" data-show-refresh="false" data-show-toggle="true" data-show-columns="true" data-search="true" data-pagination="true" data-sort-name="name" data-sort-order="desc">
@@ -58,12 +52,12 @@
 
 <script>
 	$(document).ready(function() {
-		function fetchReport(bulan) {
+		function fetchReport(bulan_tahun) {
 			$.ajax({
 				url: "<?php echo base_url('dashboard_teknisi/fetch_report_bulanan'); ?>",
 				method: "POST",
 				data: {
-					bulan: bulan
+					bulan_tahun: bulan_tahun
 				},
 				dataType: "json",
 				success: function(data) {
@@ -105,16 +99,18 @@
 			}
 		}
 
-		function setDefaultMonth() {
-			var currentMonth = new Date().getMonth() + 1; // Get current month (0-based, so add 1)
-			$('#bulan').val(currentMonth).change();
+		function setDefaultMonthYear() {
+			var currentDate = new Date();
+			var currentMonth = ('0' + (currentDate.getMonth() + 1)).slice(-2); // Get current month and pad with 0 if needed
+			var currentYear = currentDate.getFullYear();
+			$('#bulan_tahun').val(currentMonth + '-' + currentYear).change();
 		}
 
-		$('#bulan').change(function() {
-			var bulan = $(this).val();
-			fetchReport(bulan);
+		$('#bulan_tahun').change(function() {
+			var bulan_tahun = $(this).val();
+			fetchReport(bulan_tahun);
 		});
 
-		setDefaultMonth();
+		setDefaultMonthYear();
 	});
 </script>
