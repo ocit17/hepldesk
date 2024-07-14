@@ -105,7 +105,7 @@ class Dashboard_teknisi extends CI_Controller
         $this->load->view('template', $data);
     }
 
-    function report_bulanan()
+    function report_bulanan_old()
     {
         $data['header'] = "header/header";
         $data['navbar'] = "navbar/navbar";
@@ -126,6 +126,38 @@ class Dashboard_teknisi extends CI_Controller
             FROM `ticket` a')->result();
         $this->load->view('template', $data);
     }
+
+    public function report_bulanan()
+    {
+        $data['header'] = "header/header";
+        $data['navbar'] = "navbar/navbar";
+        $data['sidebar'] = "sidebar/sidebar";
+        $data['body'] = "body/report_bulanan_new";
+        $this->load->view('template', $data);
+    }
+
+    public function fetch_report_bulanan()
+    {
+        $bulan = $this->input->post('bulan');
+        $query = 'SELECT
+                a.id_ticket,
+                a.tanggal as request_date,
+                a.tanggal_proses,
+                a.tanggal_solved,
+                a.problem_summary,
+                (SELECT nama FROM karyawan WHERE karyawan.nik=a.reported) as dibuat_oleh,
+                (SELECT kr.nama FROM karyawan kr
+                JOIN teknisi tk ON kr.nik=tk.nik WHERE tk.id_teknisi=a.id_teknisi) as by_teknisi,
+                a.status,
+                a.progress
+              FROM `ticket` a';
+        if ($bulan) {
+            $query .= ' WHERE MONTH(a.tanggal) = ' . $bulan;
+        }
+        $data['rows'] = $this->db->query($query)->result();
+        echo json_encode($data['rows']);
+    }
+
 
     public function pdfreportteknisi($id)
     {
