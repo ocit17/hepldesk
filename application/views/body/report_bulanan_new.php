@@ -70,7 +70,7 @@
 							'<td>' + (row.tanggal_solved ? row.tanggal_solved : '') + '</td>' +
 							'<td>' + row.problem_summary + '</td>' +
 							'<td>' + row.dibuat_oleh + '</td>' +
-							'<td>' + row.by_teknisi + '</td>' +
+							'<td>' + (row.by_teknisi ? row.by_teknisi : '') + '</td>' +
 							'<td>' + getStatus(row.status) + '</td>' +
 							'<td><div class="progress"><div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="' + row.progress + '" aria-valuemin="0" aria-valuemax="100" style="width: ' + row.progress + '%"><span>' + row.progress + ' % Complete (Progress)</span></div></div></td>' +
 							'</tr>';
